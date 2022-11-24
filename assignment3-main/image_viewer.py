@@ -52,3 +52,4 @@ def slider_callback(val):
 slider.on_changed(slider_callback)
 
 plt.show()
+
