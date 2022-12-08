@@ -59,36 +59,35 @@ def slider_callback(val):
 slider.on_changed(slider_callback)
 
 
-# #### PART 1 #####
+#### PART 1 #####
 
-# # Create a figure for inspecting the image and label data
-# # Creating a new figure for PCA
+# Create a figure for inspecting the image and label data
 
-# # Creating a new figure for PCA
-# transformer = PCA(n_components=2)
-# proj = transformer.fit_transform(np.array([x.flatten() for x in images_small]))
-#
-# plt.figure()
-# colors = [color_lut[i] for i in labels_small]
-# plt.scatter(proj[:, 0], proj[:, 1], marker='o', c=colors)
-# legends = list(range(0, 30))
-# patch_list = []
-# i = 0
-# for l in legends:
-#
-#     patch_list.append(mpatches.Patch(label=l, color=color_lut[i]))
-#     i += 1
-#
-# plt.legend(handles=patch_list, fontsize=7, loc='best', ncol=8)
-# plt.show()
+# Creating a new figure for PCA
+transformer = PCA(n_components=2)
+proj = transformer.fit_transform(np.array([x.flatten() for x in images_small]))
+
+plt.figure()
+colors = [color_lut[i] for i in labels_small]
+plt.scatter(proj[:, 0], proj[:, 1], marker='o', c=colors)
+legends = list(range(0, 30))
+patch_list = []
+i = 0
+for l in legends:
+    patch_list.append(mpatches.Patch(label=l, color=color_lut[i]))
+    i += 1
+
+plt.legend(handles=patch_list, fontsize=7, loc='best', ncol=8)
+plt.show()
 
 
 # #### PART 2 #####
-# transformer = TSNE(n_components=2, init = 'random', n_iter= 2-0000)
+# transformer = TSNE(n_components=2, init = 'pca', n_iter= 1000)
 # ## Image-small
-# proj = transformer.fit_transform(np.array([x.flatten() for x in images_small]))
+# proj = transformer.fit_transform(np.array([x.flatten() for x in images]))
+#
 # plt.figure()
-# colors = [color_lut[i] for i in labels_small]
+# colors = [color_lut[i] for i in labels]
 # plt.scatter(proj[:, 0], proj[:, 1], marker='o', c=colors)
 # legends = list(range(0, 30))
 # patch_list = []
@@ -118,23 +117,23 @@ slider.on_changed(slider_callback)
 # plt.show()
 
 
-# ### Part 3 #####
-# transformer = UMAP(n_components=2, init = 'random')
-#
-# ## Image-small
-# proj = transformer.fit_transform(np.array([x.flatten() for x in images_small]))
-# plt.figure()
-# colors = [color_lut[i] for i in labels_small]
-# plt.scatter(proj[:, 0], proj[:, 1], marker='o', c=colors)
-# legends = list(range(0, 30))
-# patch_list = []
-# i = 0
-# for l in legends:
-#     patch_list.append(mpatches.Patch(label=l, color=color_lut[i]))
-#     i += 1
-#
-# plt.legend(handles=patch_list, fontsize=7, loc='best', ncol=8)
-# plt.show()
+### Part 3 #####
+transformer = UMAP(n_components=2,min_dist=0.8)
+
+## Image-small
+proj = transformer.fit_transform(np.array([x.flatten() for x in images_small]))
+plt.figure()
+colors = [color_lut[i] for i in labels_small]
+plt.scatter(proj[:, 0], proj[:, 1], marker='o', c=colors)
+legends = list(range(0, 30))
+patch_list = []
+i = 0
+for l in legends:
+    patch_list.append(mpatches.Patch(label=l, color=color_lut[i]))
+    i += 1
+
+plt.legend(handles=patch_list, fontsize=7, loc='best', ncol=8)
+plt.show()
 
 
 
